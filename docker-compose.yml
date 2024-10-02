@@ -1,0 +1,56 @@
+services:
+  redis:
+    container_name: redis
+    image: redis/redis-stack-server
+    ports:
+      - '6379:6379'
+  celery-worker:
+    build:
+      context: .
+      target: builder
+    stop_signal: SIGINT
+    container_name: celery-worker
+    command: celery -A celery_app.celery worker --loglevel=info
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - LOG_LEVEL=DEBUG
+      - REDIS_HOST=redis
+      - APP_HOST=0.0.0.0
+      - APP_PORT=9000
+    depends_on:
+      - redis
+  moto:
+    # S3 mock
+    container_name: moto
+    image: motoserver/moto:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - MOTO_PORT=3000 # set moto listener port with env var
+  s3-file-uploader:
+    container_name: s3-file-uploader
+    command: python3 app.py
+    environment:
+      - LOG_LEVEL=DEBUG
+      - REDIS_HOST=redis
+      - APP_HOST=0.0.0.0
+      - APP_PORT=9000
+    build:
+      context: .
+      target: builder
+    # flask requires SIGINT to stop gracefully
+    # (default stop signal from Compose is SIGTERM)
+    stop_signal: SIGINT
+    ports:
+      - '9000:9000'
+    depends_on:
+      - redis
+      - moto
+      - celery-worker
+    healthcheck:
+      test: curl --fail http://localhost:9000 || exit 1
+      interval: 40s
+      timeout: 30s
+      retries: 3
+      start_period: 60s

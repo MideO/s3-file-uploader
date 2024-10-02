@@ -1,0 +1,5 @@
+[run]
+branch = True
+omit =
+    # omit anything in tests directory
+    s3fileuploader/tests/*

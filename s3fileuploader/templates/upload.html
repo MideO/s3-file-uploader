@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        // JavaScript function to display selected file path
+        function displayFileName() {
+            var fileInput = document.getElementById('file');
+            var filePath = document.getElementById('file-path');
+            filePath.innerHTML = fileInput.files.length > 0 ? fileInput.files[0].name : "";
+        }
+    </script>
+</head>
+<body>
+<!-- Banner Section -->
+<div class="banner">
+    <div class="banner-content">
+        <h1>Welcome to File Upload Hub</h1>
+        <p>Upload your files securely and easily!</p>
+    </div>
+</div>
+
+<!-- Upload Section -->
+<div class="container">
+    <h2>Upload Your File</h2>
+    <form action="{{ url_for('index.upload_file') }}" method="POST" enctype="multipart/form-data">
+        <div class="file-upload">
+            <input type="file" name="file" id="file" required onchange="displayFileName()">
+            <label for="file" class="file-label">Choose a file</label>
+        </div>
+
+        <!-- File Path Display -->
+        <p id="file-path" class="file-path-text"></p>
+
+        <button type="submit" class="upload-btn">Upload</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert">
+        {{ messages[0] }}
+    </div>
+    {% endif %}
+    {% endwith %}
+</div>
+
+<!-- List of Uploaded Files Section -->
+<div class="container file-list-container">
+    <h2>Uploaded Files</h2>
+    <ul class="file-list">
+        {% if files %}
+        {% for file in files %}
+        <li>
+            <a href="{{ url_for('index.download_file', filename=file) }}">{{ file }}</a>
+            <!-- Delete Form -->
+            <form action="{{ url_for('index.delete_file', filename=file) }}" method="DELETE" style="display: inline;">
+                <button type="submit" class="delete-btn">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+        {% else %}
+        <li>No files uploaded yet.</li>
+        {% endif %}
+    </ul>
+</div>
+</body>
+</html>
