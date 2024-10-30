@@ -48,5 +48,5 @@ test:
 feature-test:
 	@behave
 
-test-all: install-all-requirements lint-code test feature-test devstack-down
+test-all: install-all-requirements lint-code test devstack-up feature-test devstack-down
 # Testing End

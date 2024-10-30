@@ -10,16 +10,22 @@ class LoggingConfig(BaseModel):
     def config(self):
         return {
             'version': 1,
-            'formatters': {'default': {
-                'format': self.format,
-            }},
-            'handlers': {'wsgi': {
-                'class': 'logging.StreamHandler',
-                'stream': self.stream,
-                'formatter': 'default'
-            }},
-            'root': {
-                'level': self.level,
-                'handlers': ['wsgi']
+            'formatters': {
+                'default': {
+                    'format': self.format,
+                }
+            },
+            'handlers': {
+                'default': {
+                    'class': 'logging.StreamHandler',
+                    'stream': self.stream,
+                    'formatter': 'default'
+                }
+            },
+            "loggers": {
+                '': {
+                    'level': self.level,
+                    'handlers': ['default']
+                }
             }
         }

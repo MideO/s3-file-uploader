@@ -1,3 +1,4 @@
-from s3fileuploader.dao.redis import redis
+from .redis import redis
+from .aws import S3
 
-__all__ = ['redis']
+__all__ = ['redis', 'S3']

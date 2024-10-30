@@ -1,5 +1,5 @@
 ## What is it
-### (WIP) Python/Flask application to upload files to S3 via a celery task and redis cache to prevent concurrent uploads of same file 
+### (WIP) Python/FastAPI application to upload files to S3 via a celery task and redis cache to prevent concurrent uploads of same file 
 
 ![workflow](https://github.com/MideO/s3-file-uploader/actions/workflows/ci.yml/badge.svg)
 

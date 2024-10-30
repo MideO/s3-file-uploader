@@ -5,5 +5,5 @@ Feature: Upload a file
 
   Scenario: Home Page
     When  I visit the path "/"
-    Then  I expect the page div with banner-content to contain the text "Welcome to File Upload Hub"
+    Then  I expect the page "div" with "banner-content" to contain the text "Welcome to File Upload Hub"
 
