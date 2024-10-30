@@ -11,9 +11,7 @@ class Lock:
 
     def __enter__(self):
         if redis.get(self.name):
-            raise LockAlreadyAcquiredError(
-                f"lock: {self.name} already exist"
-            )
+            raise LockAlreadyAcquiredError(f"lock: {self.name} already exist")
         redis.set(name=self.name, value=1, nx=True)
 
     def __exit__(self, exc_type, exc_val, exc_tb):

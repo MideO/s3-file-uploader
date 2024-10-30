@@ -12,9 +12,9 @@ class _UrlConfig(BaseModel):
 
 
 class RedisConfig(_UrlConfig):
-    host: str = 'localhost'
+    host: str = "localhost"
     port: int = 6379
-    scheme: str = 'redis'
+    scheme: str = "redis"
 
     @property
     def url(self):
@@ -22,6 +22,6 @@ class RedisConfig(_UrlConfig):
 
 
 class AppConfig(_UrlConfig):
-    host: str = 'localhost'
+    host: str = "localhost"
     port: int = 9000
-    scheme: str = 'http'
+    scheme: str = "http"

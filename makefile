@@ -2,8 +2,8 @@
 define HELP_TEXT
 Available Tasks
  - help: Print all available tasks
- - install-all-requirements: Install all pip requirements
- - lint-code: run pylint
+ - install-requirements: Install all pip requirements
+ - lint: run pylint
  - test: Run unit tests with pytest
  - devstack-up: Run docker compose stack
  - devstack-down: Bring down docker compose stack
@@ -21,12 +21,13 @@ help:
 # End Help Text
 
 # Linting
-lint-code:
+lint:
+	@black s3fileuploader features
 	@pylint s3fileuploader features
 # End Linting
 
 # Install Requirements
-install-all-requirements:
+install-requirements:
 	@pip3 install -r requirements-all.txt
 
 # End Install Requirements
@@ -48,5 +49,5 @@ test:
 feature-test:
 	@behave
 
-test-all: install-all-requirements lint-code test devstack-up feature-test devstack-down
+test-all: install-requirements lint test devstack-up feature-test devstack-down
 # Testing End

@@ -10,6 +10,7 @@ pytest.locks = {}
 def insert_lock_side_effect(name, value, **kwargs):
     pytest.locks[name] = value
 
+
 def delete_lock_side_effect(name):
     del pytest.locks[name]
 
@@ -20,7 +21,7 @@ def clear_lock():
 
 
 def test_lock_created_with_context_manager():
-    with patch('s3fileuploader.utils.lock.redis', MagicMock()) as redis:
+    with patch("s3fileuploader.utils.lock.redis", MagicMock()) as redis:
         a_lock = "lock"
         redis.set.side_effect = insert_lock_side_effect
         redis.delete.side_effect = delete_lock_side_effect
@@ -33,7 +34,7 @@ def test_lock_created_with_context_manager():
 
 def test_lock_cannot_be_created_when_lock_exist():
     a_lock = "lock"
-    with patch('s3fileuploader.utils.lock.redis', MagicMock()) as redis:
+    with patch("s3fileuploader.utils.lock.redis", MagicMock()) as redis:
         redis.set.side_effect = insert_lock_side_effect
         redis.delete.side_effect = delete_lock_side_effect
         redis.get.side_effect = lambda x: pytest.locks.get(x)

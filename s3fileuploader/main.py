@@ -11,17 +11,17 @@ from starlette.responses import RedirectResponse
 from config import app_config
 from routers import index
 
-middleware = [
-    Middleware(SessionMiddleware, secret_key=app_config.secret)
-]
+middleware = [Middleware(SessionMiddleware, secret_key=app_config.secret)]
 dictConfig(app_config.logging.config)
 
 app = FastAPI(middleware=middleware)
 
 cur_dir = os.path.dirname(__file__)
-app.mount("/static",
-          StaticFiles(directory=os.path.join(cur_dir, "static/"), html=True),
-          name="static")
+app.mount(
+    "/static",
+    StaticFiles(directory=os.path.join(cur_dir, "static/"), html=True),
+    name="static",
+)
 app.include_router(index.router)
 
 

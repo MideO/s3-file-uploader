@@ -15,18 +15,18 @@ def test_config_with_defaults():
     assert config.aws.region is None
     assert config.aws.endpoint is None
 
+
 @patch.dict(
     os.environ,
     {
-        "LOG_LEVEL": "DEBUG",
+        "LOGGING_LEVEL": "DEBUG",
         "REDIS_HOST": "redis",
         "REDIS_PORT": "6379",
         "APP_HOST": "0.0.0.0",
         "APP_PORT": "9000",
-        "APP_SECRET": "super secret",
-        "AWS_DEFAULT_REGION": "eu-west-2",
-        "AWS_DEFAULT_ENDPOINT": "http://moto:3000",
-
+        "SECRET": "super secret",
+        "AWS_REGION": "eu-west-2",
+        "AWS_ENDPOINT": "http://moto:3000",
     },
     clear=True,
 )
