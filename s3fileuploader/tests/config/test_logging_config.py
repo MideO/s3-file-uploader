@@ -1,4 +1,4 @@
-from s3fileuploader.config.logging_config import LoggingConfig
+from s3fileuploader.src.config.logging_config import LoggingConfig
 
 
 def test_logging_config():

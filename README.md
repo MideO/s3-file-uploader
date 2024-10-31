@@ -4,7 +4,6 @@
 ![workflow](https://github.com/MideO/s3-file-uploader/actions/workflows/ci.yml/badge.svg)
 
 ## TODO
- - Redis Locking
  - Upload, List, Download and Delete from UI
  - S3 Upload Celery Task
 
@@ -13,13 +12,11 @@
 ```
 .
 ├── .github
-├── features
-├── s3fileuploader
+├── features    
 ├── .coveragerc
 ├── .dockerignore
 ├── .flake8
 ├── .gitignore
-├── app.py
 ├── docker-compose.yml
 ├── Dockerfile
 ├── makefile
@@ -29,15 +26,27 @@
 ├── requirements-test.txt
 ├── requirements.txt
 └── s3fileuploader
+    ├── src
+    └── tests
+```
+## All available commands
+```bash
+make help
 ```
 
 ## How to test it
-```make test```
+```bash
+make test-all
+```
 
 ## How to run it
-```make devstack-up```
+```bash
+make devstack-up
+```
 
 ## How to stop it
-```make devstack-down```
+```bash
+make devstack-down
+```
 
 

@@ -2,8 +2,9 @@ from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
+
 router = APIRouter()
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="s3fileuploader/src/templates")
 
 
 @router.get("/", response_class=HTMLResponse)
@@ -13,7 +14,6 @@ async def index(request: Request):
 
 @router.post("/uploads", response_class=HTMLResponse)
 async def upload_file(request: Request):
-    # flash(request, 'File successfully uploaded')
     return templates.TemplateResponse(
         request=request,
         name="upload.html",

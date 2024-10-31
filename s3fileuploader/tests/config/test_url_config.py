@@ -1,4 +1,4 @@
-from s3fileuploader.config.url_config import RedisConfig, AppConfig
+from s3fileuploader.src.config.url_config import RedisConfig, AppConfig
 
 
 def test_redis_config():

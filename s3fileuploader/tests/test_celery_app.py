@@ -1,4 +1,4 @@
-from s3fileuploader.celery_app import celery
+from s3fileuploader.src.celery_app import celery
 
 
 def test_celery_redis_configured():

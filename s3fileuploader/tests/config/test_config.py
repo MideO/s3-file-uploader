@@ -1,9 +1,9 @@
 import os
 from unittest.mock import patch
 
-from s3fileuploader.config.config import Config
-from s3fileuploader.config.logging_config import LoggingConfig
-from s3fileuploader.config.url_config import RedisConfig, AppConfig
+from s3fileuploader.src.config.config import Config
+from s3fileuploader.src.config.logging_config import LoggingConfig
+from s3fileuploader.src.config.url_config import RedisConfig, AppConfig
 
 
 def test_config_with_defaults():

@@ -10,7 +10,7 @@ services:
       target: builder
     stop_signal: SIGINT
     container_name: celery-worker
-    command: celery -A s3fileuploader.celery_app.celery worker --loglevel=info
+    command: celery -A s3fileuploader.src.celery_app.celery worker --loglevel=info
     environment:
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
@@ -30,8 +30,7 @@ services:
       - MOTO_PORT=3000 # set moto listener port with env var
   s3-file-uploader:
     container_name: s3-file-uploader
-    working_dir: /s3fileuploader
-    command: python main.py
+    command: python /s3fileuploader/src/main.py
     environment:
       - LOG_LEVEL=DEBUG
       - REDIS_HOST=redis

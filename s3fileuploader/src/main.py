@@ -8,9 +8,10 @@ from starlette.middleware import Middleware
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.responses import RedirectResponse
 
-from config import app_config
 from routers import index
+from s3fileuploader.src.dependency_factory import dependencies
 
+app_config = dependencies.config
 middleware = [Middleware(SessionMiddleware, secret_key=app_config.secret)]
 dictConfig(app_config.logging.config)
 

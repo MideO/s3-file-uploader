@@ -1,11 +1,11 @@
 from moto import mock_aws
 
-from s3fileuploader.dao import aws
+from s3fileuploader.src.clients import aws
 
 
 @mock_aws
 def test_s3():
-    s3 = aws._s3(region_name="us-east-1", endpoint_url=None)
+    s3 = aws.s3_client(region_name="us-east-1", endpoint_url=None)
     bucket = "bucket"
     key = "key"
     content = "some content in the file"
