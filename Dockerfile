@@ -11,5 +11,4 @@ RUN --mount=type=cache,target=/root/.cache/pip pip3 install -r requirements.txt
 
 COPY s3fileuploader/src /s3fileuploader/src
 USER nobody
-ENV PYTHONPATH .
 

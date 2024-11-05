@@ -1,4 +1,4 @@
-from s3fileuploader.src.dependency_factory import dependencies
+from ..src.dependency_factory import dependencies
 
 
 def test_dependency_factory_s3_service_returns_same_instance_always():

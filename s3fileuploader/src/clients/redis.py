@@ -1,4 +1,3 @@
-# Redis
 from redis import Redis
 
 

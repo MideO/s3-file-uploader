@@ -1,4 +1,4 @@
-from s3fileuploader.src.config.logging_config import LoggingConfig
+from ...src.config.logging_config import LoggingConfig
 
 
 def test_logging_config():
@@ -20,5 +20,5 @@ def test_logging_config():
                 "formatter": "default",
             }
         },
-        "loggers": {"": {"level": "INFO", "handlers": ["default"]}},
+        "loggers": {"app": {"handlers": ["default"], "level": "INFO"}},
     }

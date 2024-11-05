@@ -1,9 +1,9 @@
 from celery import Celery
 
-from s3fileuploader.src.clients import s3_client, redis_client
-from s3fileuploader.src.config import Config
-from s3fileuploader.src.services.aws import AwsS3Service
-from s3fileuploader.src.utils.lock import Lock
+from clients import s3_client, redis_client
+from config import Config
+from services.aws import AwsS3Service
+from utils.lock import Lock
 
 
 class DependencyFactory:

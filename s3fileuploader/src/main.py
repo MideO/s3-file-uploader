@@ -1,3 +1,4 @@
+import logging
 import os.path
 from logging.config import dictConfig
 
@@ -9,7 +10,7 @@ from starlette.middleware.sessions import SessionMiddleware
 from starlette.responses import RedirectResponse
 
 from routers import index
-from s3fileuploader.src.dependency_factory import dependencies
+from dependency_factory import dependencies
 
 app_config = dependencies.config
 middleware = [Middleware(SessionMiddleware, secret_key=app_config.secret)]
@@ -31,5 +32,8 @@ async def custom_404_handler(_, __):
     return RedirectResponse("/")
 
 
+LOG = logging.getLogger("app")
+
 if __name__ == "__main__":
+    LOG.info("App running at %s", app_config.app.url)
     uvicorn.run(app, host=app_config.app.host, port=app_config.app.port)

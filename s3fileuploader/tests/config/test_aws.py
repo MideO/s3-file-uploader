@@ -1,4 +1,4 @@
-from s3fileuploader.src.config.aws import AwsConfig
+from ...src.config.aws import AwsConfig
 
 
 def test_aws_config_with_defaults():

@@ -22,5 +22,5 @@ class LoggingConfig(BaseModel):
                     "formatter": "default",
                 }
             },
-            "loggers": {"": {"level": self.level, "handlers": ["default"]}},
+            "loggers": {"app": {"level": self.level, "handlers": ["default"]}},
         }

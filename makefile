@@ -32,7 +32,7 @@ devstack-down: ## Tear down docker compose stack
 # Testing
 .PHONY: test
 test: ## Run pytest with coverage
-	@python3 -m pytest -v --cov=s3fileuploader.src --ignore=tests --cov-report term-missing ./s3fileuploader
+	@python3 -m pytest -v --cov=s3fileuploader --cov-report term-missing s3fileuploader/tests
 
 feature-test: ## Run behave feature tests
 	@python3 -m behave

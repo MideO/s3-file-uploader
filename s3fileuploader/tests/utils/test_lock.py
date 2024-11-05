@@ -2,7 +2,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from s3fileuploader.src.utils.lock import Lock, LockAlreadyAcquiredError
+from ...src.utils.lock import Lock, LockAlreadyAcquiredError
 
 pytest.locks = {}
 

@@ -1,6 +1,6 @@
 from unittest.mock import patch, MagicMock
 
-from s3fileuploader.src.clients import redis_client
+from ...src.clients import redis_client
 
 
 def test_redis():

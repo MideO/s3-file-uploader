@@ -1,6 +1,6 @@
 from moto import mock_aws
 
-from s3fileuploader.src.clients import aws
+from ...src.clients import aws
 
 
 @mock_aws
