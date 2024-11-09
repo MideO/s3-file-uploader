@@ -12,7 +12,7 @@
 ```
 .
 ├── .github
-├── features    
+├── features 
 ├── .coveragerc
 ├── .dockerignore
 ├── .flake8
@@ -21,6 +21,7 @@
 ├── Dockerfile
 ├── makefile
 ├── pylintrc
+├── pytest.ini
 ├── README.md
 ├── requirements-all.txt
 ├── requirements-test.txt

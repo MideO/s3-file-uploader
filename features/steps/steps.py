@@ -15,3 +15,12 @@ def visit_uri(context, path):
 def check_element_text(context, element, cls, text):
     node = context.browser.page.find(element, class_=cls)
     assert text in node.text
+
+
+@behave.when('I upload a "{filename}"')
+def upload_file(context, filename):
+    context.browser.select_form('form[action="http://localhost:9000/uploads"]')
+    resource_file = f"{context.resources_directory}/{filename}"
+    with open(resource_file, "rb") as resource:
+        context.browser["file"] = resource
+        context.upload_result = context.browser.submit_selected()
