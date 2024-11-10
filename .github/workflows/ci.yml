@@ -29,5 +29,8 @@ jobs:
         run: make devstack-up
       - name: Run feature tests
         run: make feature-test
+      - name: Spool devstack logs
+        if: ${{ always() }}
+        run: make devstack-logs
       - name: Tear Down docker composer
         run: make devstack-down

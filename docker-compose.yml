@@ -1,3 +1,6 @@
+volumes:
+  shared_data:
+
 services:
   redis:
     container_name: redis
@@ -9,9 +12,9 @@ services:
       context: .
       target: builder
     stop_signal: SIGINT
-    container_name: celery-worker
+    container_name: celery-worker-1
     working_dir: /s3fileuploader/src
-    command: celery -A celery_app.celery worker --loglevel=info
+    command: celery -A celery_app.celery worker --loglevel DEBUG
     environment:
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
@@ -19,6 +22,39 @@ services:
       - REDIS_HOST=redis
       - APP_HOST=0.0.0.0
       - APP_PORT=9000
+      - AWS_ENDPOINT=http://moto:3000
+      - AWS_ACCESS_KEY_ID=testing
+      - AWS_SECRET_ACCESS_KEY=testing
+      - AWS_SESSION_TOKEN=testing
+      - AWS_REGION=us-east-1
+      - STORAGE_PATH=${STORAGE_PATH:-/shared_data/}
+    volumes:
+      - /tmp:/shared_data
+    depends_on:
+      - redis
+  celery-worker-2:
+    build:
+      context: .
+      target: builder
+    stop_signal: SIGINT
+    container_name: celery-worker-2
+    working_dir: /s3fileuploader/src
+    command: celery -A celery_app.celery worker --loglevel DEBUG
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - LOG_LEVEL=DEBUG
+      - REDIS_HOST=redis
+      - APP_HOST=0.0.0.0
+      - APP_PORT=9000
+      - AWS_ENDPOINT=http://moto:3000
+      - AWS_ACCESS_KEY_ID=testing
+      - AWS_SECRET_ACCESS_KEY=testing
+      - AWS_SESSION_TOKEN=testing
+      - AWS_REGION=us-east-1
+      - STORAGE_PATH=${STORAGE_PATH:-/shared_data/}
+    volumes:
+      - /tmp:/shared_data
     depends_on:
       - redis
   moto:
@@ -42,7 +78,9 @@ services:
       - AWS_SECRET_ACCESS_KEY=testing
       - AWS_SESSION_TOKEN=testing
       - AWS_REGION=us-east-1
-
+      - STORAGE_PATH=${STORAGE_PATH:-/shared_data/}
+    volumes:
+      - /tmp:/shared_data
     build:
       context: .
       target: builder

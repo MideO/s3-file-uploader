@@ -27,6 +27,7 @@ def test_config_with_defaults():
         "SECRET": "super secret",
         "AWS_REGION": "eu-west-2",
         "AWS_ENDPOINT": "http://moto:3000",
+        "STORAGE_PATH": "",
     },
     clear=True,
 )
@@ -38,3 +39,4 @@ def test_config_with_environment_variables():
     assert config.app.url == "http://0.0.0.0:9000"
     assert config.aws.region == "eu-west-2"
     assert config.aws.endpoint == "http://moto:3000"
+    assert config.storage_path == ""

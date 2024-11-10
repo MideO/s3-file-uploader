@@ -1,11 +1,23 @@
-## What is it
-### (WIP) Python/FastAPI application to upload files to S3 via a celery task and redis cache to prevent concurrent uploads of same file 
+## What is it?
+##### Python/FastAPI application to save and delete AWS S3 files via celery tasks.
+##### A redis lock is used to handle concurrency across multiple instances 
 
 ![workflow](https://github.com/MideO/s3-file-uploader/actions/workflows/ci.yml/badge.svg)
 
 ## TODO
- - Upload, List, Download and Delete from UI
- - S3 Upload Celery Task
+ - Upload
+   - [x] UI 
+   - [x] Celery Task
+ - List
+   - [ ] UI
+   - [ ] Celery Task
+ - Download
+   - [ ] UI
+   - [ ] Celery Task
+ - Delete
+   - [ ] UI
+   - [ ] Celery Task
+ 
 
 ### Project structure:
 

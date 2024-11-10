@@ -8,10 +8,11 @@ from ...src.routers import index
 
 
 @pytest.mark.asyncio
-@patch("s3fileuploader.src.routers.index.dependencies.s3_service")
+@patch("s3fileuploader.src.routers.index.dependencies")
 @patch("s3fileuploader.src.routers.index.templates.TemplateResponse")
-async def test_upload_file(response, s3_service):
-    s3_service.upload_file = MagicMock()
+async def test_upload_file(response, dependencies):
+    dependencies.upload_task = MagicMock()
+    dependencies.config.storage_path = ""
     request = MagicMock()
     file_content = BytesIO(b"Test file content")
     file_name = "test_upload.txt"
@@ -24,6 +25,6 @@ async def test_upload_file(response, s3_service):
         name="upload.html",
         context={"message": "File successfully uploaded"},
     )
-    s3_service().upload_file.assert_called_with(
-        content=file_content, filename=file_name, bucket="test"
+    dependencies.upload_task.apply_async.assert_called_with(
+        (file_name, file_name, "test")
     )

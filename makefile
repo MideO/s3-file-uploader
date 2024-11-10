@@ -6,7 +6,7 @@ help: ## Show this help.
 
 
 # End Help Text
-
+STORAGE_PATH=${GITHUB_WORKSPACE:-/shared_data/}
 # Linting
 lint: ## Run black formatter and pylint
 	@python3 -m flake8 s3fileuploader features
@@ -24,6 +24,24 @@ install-requirements: ## Run Install All Requirements
 devstack-up: ## Run docker compose stack
 	@docker compose up --build -d
 
+devstack-logs: ## Spool Logs
+	@echo "\nDev Stack Logs\n"
+	@echo "redis logs"
+	@echo "============="
+	@docker logs redis
+	@echo "\nmoto logs"
+	@echo "============="
+	@docker logs moto
+	@echo "\ncelery-worker-1 logs"
+	@echo "===================="
+	@docker logs celery-worker-1
+	@echo "\ncelery-worker-2 logs"
+	@echo "===================="
+	@docker logs celery-worker-2
+	@echo "\ncelery-worker-2 logs"
+	@echo "===================="
+	@docker logs s3-file-uploader
+	@echo "\n"
 devstack-down: ## Tear down docker compose stack
 	@docker compose down  --volumes --remove-orphans
 # Local Stack End
@@ -37,6 +55,7 @@ test: ## Run pytest with coverage
 feature-test: ## Run behave feature tests
 	@python3 -m behave
 
+
 test-all: ## Run end to end tests
-	@make install-requirements lint test devstack-up feature-test devstack-down
+	@make install-requirements lint test devstack-up feature-test devstack-logs devstack-down
 # Testing End
