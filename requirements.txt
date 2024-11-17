@@ -12,3 +12,4 @@ fastapi[standard]==0.115.4
 starlette==0.41.2
 uvicorn==0.32.0
 itsdangerous==2.2.0
+ prometheus-fastapi-instrumentator==7.0.0

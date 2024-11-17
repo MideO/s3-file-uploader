@@ -5,12 +5,13 @@ from logging.config import dictConfig
 import uvicorn
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+from prometheus_fastapi_instrumentator import Instrumentator
 from starlette.middleware import Middleware
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.responses import RedirectResponse
 
-from routers import index
 from dependency_factory import dependencies
+from routers import index
 
 app_config = dependencies.config
 middleware = [Middleware(SessionMiddleware, secret_key=app_config.secret)]
@@ -31,6 +32,9 @@ app.include_router(index.router)
 async def custom_404_handler(_, __):
     return RedirectResponse("/")
 
+
+# Instrument the FastAPI app to expose Prometheus metrics
+Instrumentator().instrument(app).expose(app)
 
 LOG = logging.getLogger("app")
 
